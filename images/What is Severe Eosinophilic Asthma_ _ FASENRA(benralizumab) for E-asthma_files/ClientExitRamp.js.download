@@ -1,0 +1,509 @@
+var clickedLink;
+var vanityUrl;
+var urlType;
+var targetUrl;
+var data;
+var targetType;
+var bindcounter = 0;
+var bindExitRamp;
+var executed;
+var internalLinksArray = [
+"https://www.azpicentral.com/fasenra/fasenra_pi.pdf#page=1",   
+"https://www.azpicentral.com/fasenra/fasenra.pdf#page=1",    
+"http://www.azprivacynotice.com/Privacy-Notice.html",
+"http://us-aereporting.astrazeneca.com/",
+"http://www.azprivacynotice.com/Legal-Statement.html",
+"http://www.astrazeneca-us.com/home",
+"http://www.astrazeneca-us.com/contact-us",
+"http://mysms101.com/FASENRA%20SMS%20Terms%20%20Conditions.htm",
+"https://www.azandmeapp.com/"];
+
+
+
+$CQ(document).ready(function ($) {
+    try {
+			$CQ(document).on("click", "a", function (e) {
+			executed = true;
+            vanityUrl = undefined;
+            targetUrl = undefined;
+            clickedLink = $CQ(this).attr('href');
+			console.log("clickedLink======"+clickedLink);
+            targetType = $CQ(this).attr('target');
+            var attributeForIE = $CQ(this).attr('data-status');
+            if(attributeForIE == "created-for-ie"){
+                 close_window();
+                 e.preventDefault();
+				 window.open(clickedLink, '_blank');
+
+            }else{
+                if (!localLink(clickedLink) && isValidLink(clickedLink)) {
+                    e.preventDefault();
+                    			console.log("run exit ramp "+clickedLink);
+                    runExitRamp(clickedLink);
+                }
+            }
+        });
+	} catch (e) {
+
+	}
+	 bindExitRamp = window.setInterval(function(){
+			bindDOM();
+	},5000);
+
+
+	try {
+    $(document).on('click','.ok',function(e){
+        //call callExitRampSC function
+        try {
+            callExitRampSC();
+        } catch (e) {
+
+        } finally {
+            if (exitRampLink(clickedLink) && targetUrl) {
+                if (targetType && targetType.length > 1 && targetType == '_blank') {
+                    close_window();
+                    if ((/MSIE (\d+\.\d+);/.test(navigator.userAgent) ) || (/Trident.*rv[ :]*11\./.test(navigator.userAgent)) ) {
+                        var referLink = document.createElement('a');
+                        referLink.target = "_blank";
+                        referLink.href = targetUrl;
+                        referLink.setAttribute('data-status',"created-for-ie");
+                        document.body.appendChild(referLink);
+                        referLink.click();
+                          close_window();
+                    } else {
+                        window.open(targetUrl);
+                    }
+                    // window.open(targetUrl);  
+
+                } else {
+                    window.location = targetUrl;
+                }
+            } else {
+                if (targetType && targetType.length > 1 && targetType == '_blank') {
+                    close_window();
+                   if ((/MSIE (\d+\.\d+);/.test(navigator.userAgent) ) || (/Trident.*rv[ :]*11\./.test(navigator.userAgent)) ) {
+                        var referLink = document.createElement('a');
+                        referLink.target = "_blank";
+                        referLink.href = clickedLink;
+                        referLink.setAttribute('data-status',"created-for-ie");
+                        document.body.appendChild(referLink);
+                        referLink.click();
+                       close_window();
+                    } else {
+                        window.open(clickedLink);
+                    }
+                    // window.open(clickedLink);  
+
+                } else {
+                    window.location = clickedLink;
+                }
+            }
+        }
+    });
+
+    $(document).on('click','.back, .close-modal-overlay',function(e){
+        close_window();
+    });
+	}catch(err){
+
+	}
+
+    try {
+        $CQ.ajax({
+            url: getExitRampPagePath(),
+            type: "GET",
+            success: function (d) {
+                data = d;
+            }
+        });
+    } catch (e) {}
+
+});
+
+function bindDOM(){
+	if(bindcounter<6){
+	bindcounter++;
+	var teaserlength =$(".teaser a").length;
+		if(teaserlength > 0){
+			$CQ(".teaser a").click(function(event){
+			vanityUrl=undefined;
+			targetUrl=undefined;
+			clickedLink=$CQ(this).attr("href");
+			targetType=$CQ(this).attr("target");
+			if(!localLink(clickedLink)&&isValidLink(clickedLink)){
+				event.preventDefault();
+				runExitRamp(clickedLink)
+			}});
+			window.clearInterval(bindExitRamp)
+		}
+	}else{
+		window.clearInterval(bindExitRamp)
+	}
+}
+function isValidLink(clickedLink) {
+    if (clickedLink) {
+        if (startsWith(clickedLink, "#") || clickedLink.length === 0 || startsWith(clickedLink, "javascript")) {
+            return false;
+        } else {
+            return true;
+        }
+    } else {
+        return false;
+    }
+}
+
+function close_window() {
+    $CQ('.window .back').parents("div.window").siblings('.mask').hide();
+    $CQ('.window .back').parents("div.window").hide();
+}
+
+function open_window(id) {
+
+    //Get the screen height and width
+    var maskHeight = $CQ(document).height();
+    var maskWidth = $CQ(window).width();
+	maskWidth = "100%";
+    maskHeight = maskHeight+270;
+
+    //Set height and width to mask to fill up the whole screen
+    $CQ(id).siblings(".mask").css({
+        'width': maskWidth,
+        'height': maskHeight
+    });
+    //transition effect     
+    $CQ(id).siblings(".mask").fadeIn(100);
+    $CQ(id).siblings(".mask").fadeTo("fast", 0.8);
+
+    //Get the window height and width
+    var winH = $CQ(window).height();
+    var winW = $CQ(window).width();
+    //Set the popup window to center
+    //$CQ(id).css('top', winH / 2 - $CQ(id).height() / 2);
+    //$CQ(id).css('left', winW / 2 - $CQ(id).width() / 2);
+    reposition();
+
+    //transition effect
+    $CQ(id).fadeIn(200);
+};
+
+
+function reposition(){
+    var left = ($(window).width()/2) - ($("#exitdialog").innerWidth()/2);
+    $("#exitdialog").css({left: left});
+}
+$(window).resize(function(){
+    reposition();
+});
+
+function runExitRamp(hreflink) {
+
+   if(executed){
+		var currentPage = window.location;
+       if (!internalLink(hreflink) && !exitRampLink(hreflink) && isExternalLink(hreflink)) {
+    console.log("runExitRamp "+hreflink);           
+			if (AZ.Env.disableOverlay) {
+				var exitRampPagePath = getExitRampPagePath();
+				//re-direct to exit-ramp page
+				if (vanityUrl) {
+					window.location = exitRampPagePath + "?returnpage=" + currentPage + "&targetpage=" + hreflink + "&vanityUrl=" + vanityUrl;
+				} else {
+					window.location = exitRampPagePath + "?returnpage=" + currentPage + "&targetpage=" + hreflink + "&vanityUrl=" + hreflink;
+				}
+			} else {
+				//show modal window
+				if(internalLinksArray.indexOf(hreflink)>-1){
+					window.open(hreflink,"_blank");
+				}else{
+					show_modal(hreflink);		
+				}
+
+			}
+		} else if (exitRampLink(hreflink)) {
+            console.log("exitRampLink "+hreflink);
+			var queryStringObj = queryStringIntoObject(hreflink);
+			targetUrl = decodeURIComponent(queryStringObj.targetpage);
+			if (isInternalUrl(targetUrl)) {
+				if (targetType == "_blank") {
+					window.open(targetUrl);
+				} else {
+					window.location = targetUrl;
+				}
+			} else {
+				if (AZ.Env.disableOverlay) {
+					var exitRampPagePath = getExitRampPagePath();
+					//re-direct to exit-ramp page
+					if (vanityUrl) {
+						window.location = appendVanityUrl(hreflink, vanityUrl);
+					} else {
+						window.location = appendVanityUrl(hreflink, targetUrl);
+					}
+				} else {
+					//show modal window
+					show_modal(hreflink);
+				}
+			}
+		} else {
+			if (targetType == "_blank") {
+					window.open(hreflink);
+			} else {
+				window.location = hreflink;
+			}
+			console.log("Else "+hreflink);
+		}
+		executed = false;
+   }
+}
+
+function appendVanityUrl(hreflink, vanityUrl) {
+    if (hreflink.indexOf("?") !== -1) {
+        return hreflink + "&vanityUrl=" + vanityUrl;
+    } else {
+        return hreflink + "?vanityUrl=" + vanityUrl;
+    }
+}
+
+function getExitRampPagePath() {
+    var exitRampFile = 'exit-ramp.html';
+    var url = '';
+    if (AZ.Env.baseUrl) {
+        if (endsWith(AZ.Env.baseUrl, "/")) {
+            AZ.Env.baseUrl = AZ.Env.baseUrl.substring(0, AZ.Env.baseUrl.length - 1)
+        }
+        url = AZ.Env.baseUrl.split('/');
+        url.push(exitRampFile);
+        url = url.join('/');
+        return url;
+    } else {
+        return "/" + exitRampFile;
+    }
+}
+
+function show_modal(hreflink) {
+    if ($CQ("body").find("#empoverlay").length == 0) {
+        $CQ("body").append("<div id='empoverlay'><div id='exitdialog' class='window'></div><div class='mask'></div></div>");
+    }
+    if (AZ.Env.baseUrl && !data) {
+        $CQ.ajax({
+            url: getExitRampPagePath(),
+            async: false,
+            success: function (d) {
+                data = d;
+            }
+        });
+    }
+    if (data) {
+        populateExitRampData(data, hreflink);
+    } else {
+
+        $CQ.ajax({
+            url: '/exit-ramp.html',
+            async: false,
+            success: function (d) {
+                data = d;
+            }
+        });
+        if (data) {
+            populateExitRampData(data, hreflink);
+        } else {
+            $CQ("#exitdialog").html("You Clicked:" + hreflink);
+        }
+    }
+	$("#exitdialog .btn.ok").text("CONTINUE");
+    $("#exitdialog .btn.back").text("BACK");
+
+    open_window("#exitdialog");
+    /*   if ($("#CookieReportsBanner").length > 0) {
+        var overlay_top = parseInt($("#CookieReportsBanner").height());
+
+         $("#exitdialog").css({
+            "top": overlay_top+20
+        });
+    }
+
+
+    else{
+$("#exitdialog").css({ "top": "10%" });
+    }
+        var setBackWidth=$('.btn.ok').outerWidth();
+    var setBackHeight=$('.btn.ok').outerHeight();
+
+    $('.btn.back').css('width',setBackWidth);
+    $('.btn.back').css('height',setBackHeight);*/
+}
+
+
+/*$( window ).on( "orientationchange", function( event ) {
+    if("#exitdialog"){
+        $("#exitdialog").css({ "top": "10%" });
+setTimeout(function(){
+	        var setBackWidth=$('.btn.ok').outerWidth();
+    var setBackHeight=$('.btn.ok').outerHeight();
+
+    $('.btn.back').css('width',setBackWidth);
+    $('.btn.back').css('height',setBackHeight);
+    },300);
+	}
+});
+*/
+
+
+
+function populateExitRampData(data, hreflink) {
+    var exitTitle = $CQ(data).find('.alert-title').html();
+    var exitContent = $CQ(data).find('.alert-content').html();
+    if (vanityUrl) {
+        exitTitle = exitTitle.replace("{externalurl}", vanityUrl);
+        exitContent = exitContent.replace("{externalurl}", vanityUrl);
+    } else {
+        if (exitRampLink(hreflink) && targetUrl) {
+            exitTitle = exitTitle.replace("{externalurl}", targetUrl);
+            exitContent = exitContent.replace("{externalurl}", targetUrl);
+        } else {
+            exitTitle = exitTitle.replace("{externalurl}", hreflink);
+            exitContent = exitContent.replace("{externalurl}", hreflink);
+        }
+    }
+    var exitOkBtn = $CQ(data).find('.alert-ok').val();
+    var exitBackBtn = $CQ(data).find('.alert-back').val();
+    var urlTarget = $CQ(data).find('#urlTarget').val();
+    targetType = urlTarget;
+    var content = $CQ(['<h2>', exitTitle, '</h2>', '<p>', exitContent, '</p>', '<p class="btns">', '<button class="btn ok" href="#">', exitOkBtn, '</button>', '<button class="btn back" href="#">', exitBackBtn, '</button>', '</p>'].join(''));
+    $CQ("#exitdialog").html(content);
+}
+
+function endsWith(str, suffix) {
+    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+}
+
+function startsWith(str, prefix) {
+    return str.substring(0, prefix.length) == prefix;
+}
+
+function isInternalUrl(targetUrl) {
+    console.log("TargetURL = "+targetUrl);
+    isExternalUrl(targetUrl);
+    if (urlType && urlType === 'internal') {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function isExternalUrl(hreflink) {
+    var baseUrl;
+
+    if (AZ.Env.baseUrl) {
+        baseUrl = AZ.Env.baseUrl;
+    } else {
+        baseUrl = "";
+    }
+
+    console.log("baseUrl "+baseUrl);
+    
+    var a = [];
+    /*a = hreflink.split("?");
+    if(a.length > 1){
+        hreflink = a[0];
+    }*/
+    //var dataToSend = "hreflink="+encodeURIComponent(hreflink)+"&baseUrl="+baseUrl;
+    if (hreflink.indexOf("?") != -1) {
+        hreflink = hreflink.replace("?", "\\?");
+    }
+
+    $CQ.ajax({
+        url: '/bin/exitramp',
+        type: 'POST',
+        dataType: 'json',
+        //data: dataToSend,
+        data: {
+            "hreflink": hreflink,
+            "baseUrl": baseUrl
+        },
+        async: false,
+        success: function (data) {
+
+            if (data.urlType === '') {
+                urlType = 'external';
+            } else if (data.urlType === 'internal') {
+                urlType = 'internal';
+            } else if (data.urlType === 'external') {
+                vanityUrl = data.vanityUrl;
+                urlType = 'external';
+            }
+            console.log("urlType "+urlType);
+            console.log("vanityURL "+vanityUrl);
+        }
+    });
+}
+
+function exitRampLink(hreflink) {
+    if (hreflink.match("^/exit-ramp")) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function internalLink(hreflink) {
+    if (hreflink.match("^/content") || hreflink.match("^/etc")) {
+            console.log("inside internalLink link:"+hreflink);
+        return true;
+    } else {
+        console.log("FALSE internalLink:"+hreflink);
+        return false;
+    }
+}
+
+function isExternalLink(hreflink) {
+        console.log("external link "+hreflink);
+    if ((hreflink.match("^http") || hreflink.match("^www")) && !isInternalUrl(hreflink)) {
+        console.log("external link");
+        return true;
+    } else {
+        console.log("FALSE externalLink:"+hreflink);
+        return false;
+    }
+}
+
+function localLink(hreflink) {
+	if (hreflink == undefined|| hreflink == "#" || hreflink.match("^https")) {
+            return false;
+        } else {
+			hreflink = hreflink.replace("http://", "");     
+        }
+    var slashStart = hreflink.match("^/");
+    var slashStartFlag = false;
+    if (slashStart != null) {
+        slashStartFlag = true;
+    }
+
+    var currentDomain = "";
+    if (AZ.Env.currentDomain) {
+        currentDomain = AZ.Env.currentDomain;
+    }
+    var curDomainStartFlag = startsWith(hreflink, currentDomain);
+
+    if (!exitRampLink(hreflink) && (slashStartFlag || curDomainStartFlag)) {
+        return true;
+    } else {
+        return false;
+    }
+} 
+
+function queryStringIntoObject(f) {
+    var e = {}, a = [],
+        d = [],
+        c = 0,
+        b;
+    a = f.split("?");
+    f = (a.length > 1) ? a[1] : a[0];
+    a = f.split("&");
+    b = a.length;
+    while (c < b) {
+        d = a[c].split("=");
+        e[d[0]] = d[1];
+        c += 1
+    }
+    return e
+}
+

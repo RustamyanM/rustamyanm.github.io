@@ -1,0 +1,780 @@
+/************* Common Design ************/
+
+.SamsungBrowser #surveyRender input.form_button_submit {
+    margin-top: 85px;
+}
+
+#survey_text_0 .form_leftcolmark, #survey_text_1 .form_leftcolmark {
+    display: none;
+    visibility: hidden;
+}
+
+#surveyRender #survey_text_0 .form_rightcol input, #surveyRender #survey_text_1 .form_rightcol input {
+    top: 0 !important;
+    margin-top: 0;
+}
+#surveyRender #survey_text_0 .form_rightcol .redcheck, #surveyRender #survey_text_0 .form_rightcol .greencheck, 
+#surveyRender #survey_text_1 .form_rightcol .redcheck, #surveyRender #survey_text_1 .form_rightcol .greencheck{
+    top: initial;
+}
+#surveyRender #survey_text_0 #firstName_rightcol .form_error,
+#surveyRender #survey_text_1 #surname_rightcol .form_error{ top:initial; margin-top:5px;}
+#survey_text_2{margin-top: 20px;}
+
+.costandaffordability p, .costandaffordability ul.insurance-type-list li{
+    font-family: Arial;
+    font-size: 18px;
+    line-height: 24px;
+}
+    .costandaffordability p.pnk_cctext_color{
+    	    font-size: 12px;
+    }
+.signup-content {
+    width: 100%;
+	margin: 0 auto;
+	padding: 0;        
+}
+.redcheck , .greencheck{
+    color:transparent;
+    text-shadow: 0 0 0 #FF0000;
+    font-size: 24px;
+    margin-left:5px;
+    position:absolute;
+    top:-20px;
+}
+input[type='radio']::after {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    content: '';
+    border: 2px solid #418bba !important;
+    box-sizing: border-box;
+    border-radius:100%;
+
+}
+input[name='BEN_002']::after {
+    display: block;
+    width: 21px;
+    height: 21px;
+    background: transparent;
+    content: '';
+    border: 2px solid #418bba !important;
+    box-sizing: border-box;
+    border-radius:100%;
+    margin-left:-1px;
+    margin-top:-.5px;
+
+}
+input[type='checkbox']::after {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    content: '';
+    border: 2px solid #418bba !important;
+    box-sizing: border-box;
+    border-radius:4px;
+
+}
+    .greencheck{
+   text-shadow:0 0 0 #009900!important;
+    top:-15px;
+}
+#radio_2 {margin-top:20px!important;}
+select#registration_area {padding:2px;padding-left:5px;}
+
+#registration input#town {width:100%!important;}
+#registration input#surname {width:92%!important;margin-left:10px;}
+input.top {top:-98px!important;margin-top:90px;}
+select.top {
+    top: -108px!important;
+    margin-top: 90px;
+}
+#survey_text_4 .redcheck , #survey_text_4 .greencheck {
+  top: -56px;
+    margin-left: 8px;
+
+}
+.top .greencheck{top:-5px;}
+#registration1{display:none;}
+
+.surveyCheckbox .greencheck , .surveyCheckbox .redcheck{margin-left:100px;top:-52px;}
+.surveyCheckbox .form_error {margin-top:15px!important;margin-left:-8px;}
+.state {display:inline-block;width:65%;}
+.postalCode {display:inline-block;width:25%;margin-left:-30px;}
+#survey_text_1 .form_error {margin-left:15px;}
+.surveyRadio .form_error{margin-top:5px!important;}
+#surname_wrapper:has(> input.top) {position:relative;}
+#survey_text_6{margin-top:20px;}
+#survey_text_0 , #survey_text_1{display:inline-flex;width:45%!important;}
+.state .redcheck , .state .greencheck{top:30px;}
+#radio_0 .redcheck, #radio_0 .greencheck{margin-left:160px;top:-42px;}
+#radio_1 .redcheck, #radio_1 .greencheck{margin-left:160px;top:-42px;}
+#radio_2 .redcheck, #radio_2 .greencheck{margin-left:240px;top:-48px;}
+#radio_3 .redcheck, #radio_3 .greencheck{margin-left:240px;top:-38px;}
+#survey_text_6 .redcheck, #survey_text_6 .greencheck{margin-left:15px;top:--12px}
+
+#registration .form_rightcol{position:relative;}
+
+ #registration input[type='text'] , #registration select{width:85%!important}
+    #registration .form_error {margin-top:-5px;}
+.surveyAddressInfo {margin-top:25px;}
+#radio_2, #radio_3, #rich_text_2 ,#survey_check_0 , #survey_check_1, #survey_check_2, #survey_text_6, #survey_text_5, #survey_text_3, #radio_1{display:none;}
+.info {    margin-left: 8px;
+    margin-top: -15px!important;
+position:absolute;}
+.info img , .info2 img{width:20px;}
+.info-text , .info-text2 {    position: absolute;
+    margin-top: -50px;
+    margin-bottom: -40px;
+    margin-left: 12px;
+
+}
+.info-text2 {margin-top:-225px;margin-left:105px;}
+.info-text2 .desk {display:none;}
+.info2{
+    position:absolute;
+    margin-left: 205px;
+    margin-top: -100px;
+ }
+.hide{display:none!important}
+.info-text span ,.info-text2 span{position: absolute;
+    left: 30px;
+    top: 32px;
+    font-size: 10px;
+    width: 180px;
+    line-height: 1.35;}
+.info-text2 span {text-indent:0px;width:135px;left:20px;top:35px;}
+.info-text img , .info-text2 img{width:227px;}
+.info , .info-text , .info-text2{display:inline-block;}
+.surveyform {margin-top:47px;}
+.signup-content .p2-para, 
+.signup-content ul.bullet-list,
+.section.basicsurvey,
+.signup-content ul.bullet-list li {
+	font-family: 'OpenSans-Regular';        
+    font-size: 14px;
+    line-height: 26px;
+    color: #333f48;
+}
+.signup-content .p2-para {
+    font-family: 'OpenSans-Regular';
+    /*font-weight:bold;*/
+    text-align: center;
+    margin: 25px 10px 7px 10px;
+}
+.signup-content ul.bullet-list {
+	float: left;        
+    list-style: none;
+    margin: 0px;
+}        
+.signup-content ul.bullet-list li {
+    list-style: none;
+    text-indent: -26px;
+	padding: 0px 40px;           
+}  
+.signup-content ul.bullet-list li::before {
+    content: ".";
+    color: #AE2573;
+    font-size: 40px;
+    padding-right: 15px;
+	position: relative;
+    top: -3px;                
+}  
+.sign-up-and-save .banner_head {padding-bottom: 20px;max-width:175px;}
+
+a.addRemind {
+    cursor: pointer;
+    text-decoration: underline;
+    color: #c41188;
+}
+a.addRemind:hover, a.addRemind:active{text-decoration: none;}
+/*********** Form Styling **************/
+.section.basicsurvey {
+    width: 100%;
+    margin: 0 auto 70px auto;
+    padding: 0;
+    clear: both;
+    background-color: #f7f7fb;
+    position: relative;
+    top: 50px;
+}
+#surveyHeader, .glyphicon, .addressline3, #survey_text_5,
+#survey_check_3 , #survey_check_4, #survey_check_5, #survey_text_3,
+#rich_text_0, #rich_text_1 {
+    display: none;
+}
+.signup-heading h1 {
+    font-family: 'OpenSans-Regular';
+    font-size: 25px;
+    line-height: 35px;
+    text-align: center;
+    margin: 0 70px;
+    padding: 54px 0px 20px 0px;
+    color: #333f48;
+}
+.signup-heading p {
+    text-align: center;
+    padding: 0 40px;
+}
+form#registration {
+    margin: 0 15px;
+}
+#surveyRender .form_rightcol input, #surveyRender .fields_item input {
+    position: relative;
+    top: -22px;
+    width: 100%;
+    background-color: transparent;
+    outline: none;
+    outline-style: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+#surveyRender .form_rightcol input[type="text"] , #surveyRender .fields_item input[type="text"] {border-radius:5px;border: solid #418bba 2px;padding-left:5px;}
+#surveyRender .form_rightcol input[type="radio"] {border: solid #418bba 1px!important;box-sizing:unset;}
+#surveyRender {margin-bottom:45px;}
+#surveyRender .form_leftcollabel label {
+   	margin-bottom: 0px;
+    font-weight: normal;
+}
+#surveyRender .form_rightcol input[type=radio] , #surveyRender .form_rightcol input[type=checkbox] {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: 3px;
+    margin-left:-10px;
+    margin-right:8px;
+    /*opacity:.8;*/
+}
+.surveyRadio .form_error {margin-left:-8px!important;padding-top: 10px;}
+.surveyRadio#radio_0 .form_row:nth-child(2),
+.surveyRadio#radio_2 .form_row:nth-child(2),
+.surveyRadio#radio_3 .form_row:nth-child(2) {
+    margin-top: -15px;
+} 
+.surveyRadio#radio_0 .form_row, .surveyRadio#radio_1 .form_row,
+.surveyRadio#radio_2 .form_row, .surveyRadio#radio_3 .form_row {
+    margin-top: 10px;
+}
+.surveyRadio#radio_1 .form_row:nth-child(1) {
+    position: relative;
+    top: 25px;
+}
+#rich_text_0, #survey_text_3, 
+#survey_text_4, #radio_2, #survey_text_5 {
+    margin-top: 20px;
+}
+.surveyRadio#radio_2 .form_row:nth-child(2), 
+.surveyRadio#radio_2 .form_row:nth-child(3), 
+.surveyRadio#radio_2 .form_row:nth-child(4), 
+.surveyRadio#radio_2 .form_row:nth-child(5) {
+    display: inline-block;
+    margin-right: 25px;
+    margin-top: -20px;
+}
+#surveyRender input.form_button_submit , .reg-confirm-popup .ok-btn {
+    width: auto;
+    margin-top: 40px;
+    border: 2px solid #c41188!important;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-family: 'OpenSans-Bold';
+    color: #c41188;
+    letter-spacing: 0.1em;
+}
+#surveyRender input.form_button_submit {
+    margin: 66px 0 18px 0;
+}
+#surveyRender input.form_button_submit:hover , #surveyRender input.form_button_submit:focus ,.reg-confirm-popup .ok-btn:hover {
+    	background: #c41188;
+        text-decoration: none;
+    	color:#fff;
+    	transition-duration: 0.5s;
+    	transition-timing-function: ease;
+}
+#surveyRender input#dateOfBirth,
+#surveyRender input#BEN_003 {
+    position: relative;
+    top: -15px;
+    width: 38%!important;
+    margin-bottom: 5px;
+}
+#rich_text_5 a, #rich_text_4 a, #rich_text_1 a {
+    color: #c14488;
+    text-decoration: underline;
+}
+#radio_3 .form_row:nth-child(1) {
+    position: relative;
+    top: 10px;
+}
+.surveyRadio.section .form_rightcol , .surveyCheckbox.section .form_rightcol {
+    /*margin-left: 28px;*/
+    text-indent: -23px;
+    padding-left: 33px;
+}
+#surveyRender .end.section {
+    width: 100%;
+    margin: 0 auto;
+    display: inline-block;
+    text-align: center;
+}
+select#registration_area {
+    position: relative;
+    top: -20px;
+    width: 60%;
+    border: 2px solid #418bba;
+    border-radius:5px;
+}
+.form_error {
+    color: red;
+	position: relative;
+    top: -10px;        
+}
+.red {
+    border-bottom: 1px solid red !important;
+}
+
+/* thank you popup */
+.reg-confirm-popup {
+    display: none;
+    position: fixed;
+    top: 200px;
+    background: #00b398;
+    color: #fff;
+    padding: 50px 30px 30px 30px;
+    text-align: center;
+    border-radius: 10px;
+    max-width: 420px;
+    width: 90%;
+    left: 0;
+    right: 0;
+    position: fixed;
+    margin: 0 auto;
+    z-index: 99999;
+}
+.blanket {
+    background-color: #111;
+    opacity: .60;
+    filter: alpha(opacity = 60);
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    display: none;
+}
+.reg-confirm-popup p {
+    /*margin-top: -5px;*/
+    margin-bottom: 20px;
+    color: #ffffff !important;
+}
+.success-page .ok-btn {
+    /*background: #ae2573;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    padding: 7px 40px;
+    border-radius: 5px;*/
+    font-family: MyriadPro-Bold;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+}
+
+/****** Modal Popup ***********/
+.modal-open #modal-content-wrapper .modal {
+    opacity: 1;
+}
+#modal-content-wrapper .modal.fade .modal-dialog {
+    top: 12%;
+    max-width: 600px;
+    width: 90%;
+    margin: 30px auto;
+    z-index: inherit;
+}
+.modal-content {
+    border: none;
+    border-radius: 0px;
+}
+.modal-header {
+    min-height: 16.43px;
+    padding: 30px 0px 10px 0px;
+    border: none;
+    text-align: center;
+    color: #00b398;
+    text-transform: uppercase;
+    font-size: 18px;
+    line-height: 20px;
+    font-family: 'OpenSans-regular';
+}
+p.one {
+    font-size: 16px;
+    line-height: 19px;
+    color: #47525A;
+    margin-bottom: 25px;
+}
+p.link-row {
+    display: inline-block;
+    cursor: pointer;
+}
+.modal-header span {
+    position: relative;
+    font-family: 'OpenSans-regular';
+    width: 34px;
+    height: 34px;
+    display: table;
+    background-color: #c41188;
+    border: 2px solid #ffffff;
+    border-radius: 18px;
+    margin: -45px -13px 0 0;
+}
+.glyphicon-remove:before {
+    content: "X";
+    COLOR: #FFFFFF;
+    display: table-cell;
+    vertical-align: middle;
+}
+.banner-content a, .back-to-top a, .back-to-top a:hover {
+    padding: 12px 25px;
+    background-color: #c41188;
+    border-radius: 12px;
+    margin: 5px;
+    display: inline-block;
+    color: #ffffff !important;
+    font-family: 'OpenSans-Bold';
+    font-size: 16px;
+    line-height: 18px;
+    letter-spacing: 0.1em;
+}
+.callout-button {
+  	color: #c41188 !important;
+    border: 2px solid #c41188;
+    padding: 8px 25px;
+    display: inline-block;
+    border-radius: 29px;
+    text-transform: uppercase;
+    font-family: 'OpenSans-Bold';
+    font-size: 12px;
+    line-height: 22px;
+    letter-spacing: 0.1em;
+}
+.callout-button:hover, .callout-button:active, .callout-button:focus {
+    text-decoration: none;
+    color: #FFF !important;
+    background-color: #c41188;
+    transition-duration: 0.5s;
+    transition-timing-function: ease;
+}
+.modal-body {
+    text-align: center;
+}
+.reg-confirm-popup p:nth-child(1){font-size:16px;}
+.thanks-text .tel{text-decoration:none;color:#c41188;}
+.reg-confirm-popup .ok-btn {
+    font-family:OpenSans-Bold;    
+    margin: 0;
+    display: inline-block;
+}
+#radio_2 {margin-top:40px;}
+/*.reg-confirm-popup .thanks-text{margin-bottom:40px;}*/
+#dateOfBirth , #BEN_003 {background:url(/content/dam/website-services/us/519-fasenra-com/redesign/images/calender-image.png) no-repeat;background-position:96%;}
+
+#surveyRender .form_rightcol input[type="text"]:focus , #surveyRender .fields_item input[type="text"]:focus {
+    outline: none;
+    box-shadow: 0 2px 10px orange;
+}  
+#surveyRender .form_rightcol input[type="text"]:blur , #surveyRender .fields_item input[type="text"]:blur {
+    border: solid 418bba 2px !important;
+} 
+
+@media only screen and (max-width: 991px) {
+    /*#surveyRender input.form_button_submit {
+        margin-top: 110px;
+        position: relative;
+        top: -57em;
+    }
+    div#rich_text_4 {
+        position: relative;
+        top: 100px;
+            margin-bottom: -30px;
+    }
+    .sign-up-and-save .banner_head {padding-bottom: 300px;}*/
+	.modal-header span {
+        margin-top: -38px;
+    }
+}    
+
+@media only screen and (min-width: 768px) and (max-width:1024px) {
+    /*#surveyRender input.form_button_submit {
+        top: -29.5em;
+    }*/
+}
+
+
+@media only screen and (min-width: 320px) and (max-width:568px) and (orientation : portrait) {
+    /*#surveyRender input.form_button_submit{
+        margin-top: -12px;
+    }*/
+    .info-text{margin-top: -43px;}
+    .info-text img{
+    	width:207px;
+	}
+    .info-text span{
+    	font-size: 9px;
+    	width: 130px;
+    	top: 30px;
+    }
+	.info2{
+	    margin-left: 85px !important;
+    	margin-top: -84px !important;
+    }   
+    .info-text2{
+        margin-top: -208px;
+    	margin-left: -12px;
+    }
+}
+@media only screen and (min-width: 375px) and (max-width:667px) and (orientation : portrait) {
+    /*#surveyRender input.form_button_submit{
+         margin-top: 108px;
+    }*/
+    .reg-confirm-popup{top:170px;}
+    #modal-content-wrapper .modal.fade .modal-dialog {
+    	top: 6%;
+    }   
+}
+@media only screen and (min-width: 414px) and (max-width:736px) {
+    #surveyRender input.form_button_submit {
+    	margin-top: 165px;
+	}
+}
+
+@media (min-width: 1005px) {
+	.surveyform {
+    	margin-top: 29px;
+    }
+	.signup-content {
+        max-width: 1160px;
+    }
+	.signup-content .p2-para {
+        font-size: 20px;
+        line-height: 30px;
+    }  
+	.signup-content ul.bullet-list li {                 
+		padding-right: 0px; 
+    } 
+	#surveyRender {
+        width: 58%;
+        margin: 0px auto;
+        padding: 0;
+    }
+	.signup-heading h1 {
+        font-size: 40px;
+        line-height: 49px;
+    	margin: 116px 0 26px 0;
+    	padding-top: 53px;
+    }
+	#surveyRender input#dateOfBirth, #surveyRender input#BEN_003 {
+        width: 25%!important;
+    }
+	select#registration_area {
+        width: 40%;
+    }
+	#modal-content-wrapper .modal.fade .modal-dialog {
+   		 top: 10%;
+    }
+    p.one {
+        font-size: 16px;
+        line-height: 26px;
+    	padding: 0 40px;
+    }
+    p, li {
+        font-size: 16px;
+        line-height: 24px;
+    }
+.info ,.info2 {margin-left:30px;}
+.info2 {margin-left:310px;margin-top:-30px;}
+.info-text ,.info-text2 {
+    margin-top: -80px;
+    margin-left: 75px;
+
+}
+.info-text2 {
+    margin-top: -90px;
+    margin-left: 360px;
+}
+.info-text img ,.info-text2 img{width:370px;}
+.info-text2 img {width:410px;}
+.info-text span ,.info-text2 span{position: absolute;
+    left: 63px;
+    top: 57px;
+    font-size: 14px;
+    width: 215px;
+    line-height: 1.25;}
+.info-text2 span {left:35px;top:55px;width:280px;text-indent:0px;}
+.info img ,.info2 img{width:auto;}
+.info-text2 .mob {display:none;}
+.info-text2 .desk {display:inline;}
+.thanks-text .tel{pointer-events:none;color:#fff;}
+.sign-up-and-save .banner_head {max-width:290px;}
+.sign-up-and-save .hero-text{margin-top:30px;}
+.reg-confirm-popup p:nth-child(1){font-size:18px;}
+.reg-confirm-popup .thanks-text {font-size:16px; display:none; }
+#surveyRender .form_rightcol input[type=radio] {/*opacity:.5;*/}
+#radio_2 {margin-top:0px;}
+.signup-content .p2-para, .signup-content ul.bullet-list, .section.basicsurvey, .signup-content ul.bullet-list li {font-size:16px;}
+.signup-content ul.bullet-list:nth-of-type(1) {
+        margin-left: 8%;
+    width: 43%;
+}
+
+.signup-content ul.bullet-list:nth-of-type(2) {
+    width: 43%;
+        padding-left: 30px;
+}
+#survey_text_1 {margin-left:25px;margin-top: 20px;}
+#surname_wrapper.top , #firstName_wrapper.top{position:relative;}
+input.top{top:-72px!important;margin-top:60px;}
+select.top{top:-80px!important;margin-top:60px;}
+.redcheck , .greencheck{
+
+    font-size: 30px;
+    margin-left:20px;
+    top:-22px;
+}
+.greencheck{top:-20px;}
+#radio_0 .redcheck, #radio_0 .greencheck{margin-left:200px;top:-38px;}
+#radio_1 .redcheck, #radio_1 .greencheck{margin-left:270px;top:-38px;}
+#radio_2 .redcheck, #radio_2 .greencheck{margin-left:280px;top:-48px;}
+#radio_3 .redcheck, #radio_3 .greencheck{margin-left:200px;top:-38px;}
+
+#registration input#firstName {width:60%!important;}
+#registration input#surname {width:75%!important;}
+#registration input[type='text'] , #registration select{width:60%!important}
+#survey_text_1 {margin-left:-75px;}
+#survey_text_0 .form_error , #survey_text_1 .form_error {width:65%;}
+.postalCode{margin-left:-200px;}
+.state{width:50%;}
+.surveyCheckbox .greencheck , .surveyCheckbox .redcheck{margin-left:435px;}
+select#registration_area{padding:1px;}
+#survey_text_4 .redcheck, #survey_text_4 .greencheck {
+    top: -56px;
+    margin-left: 30px;
+}
+
+}
+@media only screen and (min-width: 991px) and (max-width:1380px){
+    input.top  {
+    top: -98px!important;
+    margin-top: 75px;
+}
+select#registration_area{top:-22px;}
+.postalCode {margin-left:-120px;}
+.top .greencheck{top:-25px;}
+
+#survey_text_4 .redcheck , #survey_text_4 .greencheck{margin-left:25px;}
+#radio_2 .redcheck, #radio_2 .greencheck{margin-left:280px;top:-48px;}
+select.top {
+    top: -108px!important;
+    margin-top: 84px;
+}
+}
+
+@media all and (max-width: 767px) { 
+    .info2 {
+    	margin-left: 37px;
+    	margin-top: -87px;
+    }
+    .surveyCheckbox .greencheck, .surveyCheckbox .redcheck {
+        margin-left: 71px;
+        top: -54px;
+    }
+}
+@media only screen and (max-width: 960px) and (min-width: 540px){
+    /*#surveyRender input.form_button_submit {
+        margin-top: 345px;
+    }
+    .fullheader ul.list-inline li.search {
+    	left: -354px;
+	}*/
+}
+
+
+
+
+/*Sign up popup styles*/
+#sign-up-new h4.modal-title{
+    display:none;
+}
+#sign-up-new .signup-heading h1{
+    margin:0;
+}
+#sign-up-new #surveyRender {
+    width: 100%;
+    margin: 0 auto;
+}
+
+#sign-up-new #surveyBody {
+    margin:0 20px;
+}
+
+#sign-up-new form#registration {
+    margin: 0;
+}
+#sign-up-new input#surname {
+    width: 60% !important;
+    margin: 0;
+}
+#sign-up-new .modal-body {
+    text-align: left;
+}
+#sign-up-new .section.basicsurvey {
+    top: 50px;
+}
+#sign-up-new .modalSignUpHead {
+    text-align: center;
+}
+#sign-up-new .state.tag-selection {
+    width: 90%;
+}
+#sign-up-new .state{width: 35%;}
+#sign-up-new .postalCode{margin-left: 20px;}
+
+#sign-up-new  #registration_area {
+    width: 80% !important;
+}
+
+#sign-up-new input#dateOfBirth, #sign-up-new input#BEN_003{
+    width: 30% !important;
+}
+
+#sign-up-new #survey_text_1 {
+    margin-left: -10px;
+}
+
+#sign-up-new select#town {
+    border: 2px solid #418bba;
+    border-radius: 5px;
+    position: relative;
+    top: -20px;
+    width: 100%!important;
+}
+#sign-up-new .surveyRadio#radio_1 .form_row:nth-child(1){
+    position: initial;
+    top: initial;
+}
+#sign-up-new .surveyRadio#radio_2 .form_row:nth-child(2), 
+#sign-up-new .surveyRadio#radio_2 .form_row:nth-child(3), 
+#sign-up-new .surveyRadio#radio_2 .form_row:nth-child(4){
+	margin-top: 10px;
+}
+#sign-up-new .surveyRadio#radio_1 .form_row:nth-child(1) .form_leftcolmark, #sign-up-new .surveyRadio#radio_2 .form_row:nth-child(1) .form_leftcolmark{ display:none;}
+#sign-up-new #radio_2, #sign-up-new #radio_1 {margin-top: 30px !important;}
+
+
+/* Dosing Remainder Style*/
+#aznDosingRemSur{
+    width: 100%;
+    height: 60vmax;
+}

@@ -1,0 +1,7 @@
+RewriteEngine on
+RewriteRule index.html$ index.php [nc]
+RewriteRule offline.html$ index.php [nc]
+
+
+
+

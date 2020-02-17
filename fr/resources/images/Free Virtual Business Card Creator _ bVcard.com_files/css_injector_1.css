@@ -1,0 +1,28 @@
+.navbar.container {
+    padding-left: 0 !important;
+}
+header.navbar {
+    margin-bottom: 10px;
+        margin-top: 0 !important;
+}
+.main-container {
+    padding: 0 15px !important;
+}
+h1.page-header {
+    margin-bottom: 5px;
+    padding: 0;
+}
+.navbar-default .navbar-toggle {
+    right: 0;
+}
+
+.btn-info.update {
+    float: right;
+    margin-top: 5px;
+}
+.clear-vcard {
+    float: right;
+}
+#block-block-11 .clear-vcard {
+    margin-top: -37px;
+}

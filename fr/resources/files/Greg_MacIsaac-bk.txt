@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:4.0
+N:MacIsaac;Greg;;;
+FN:Greg MacIsaac
+EMAIL:greg.macisaac@gc.dental
+ORG:GC America Inc.
+TEL;TYPE=work,voice;VALUE=uri:tel:+1-416-910-2864
+URL;type=pref:http://www.gcamerica.com/products/index.php
+ADR:;3737 WEST 12TH STREET;;ALSIP;IL;60803;USA
+REV:20080424T195243Z
+END:VCARD
