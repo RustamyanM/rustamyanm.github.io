@@ -1,0 +1,467 @@
+
+$(document).ready(function(){
+    /********* Home Page ***********/
+    function loopAnim(){
+        var liIndex = $('.dynamicInfoGraphic .slides.activeSlide').index();
+        if(liIndex === 2){
+            liIndex = 0;
+        }else{
+            liIndex += 1;
+        }
+        $('.dynamicInfoGraphic .slides').removeClass("activeSlide");
+        $('.dynamicInfoGraphic .slides:eq(' + liIndex + ')').addClass("activeSlide");	
+    }
+    setInterval(loopAnim, 2000);
+
+
+    $(".search-results .search-result-pagename a").each(function(){
+        if($(this).attr("href") === '/contact-us.html'){
+            $(this).attr({"data-toggle": "modal", rel: "/content/WebsiteServices/us/519-fasenra-com/en/us-redesign/contact-us.html",
+                          "data-modal-type": "largeModal", href :"#contact-us", class: "modal-page-link" });
+        }
+    });
+
+
+
+	$(".carousel-indicators li:eq(0)").attr("data-slide-id","0");
+	$(".carousel-indicators li:eq(1)").attr("data-slide-id","1");
+	$(".carousel-indicators li:eq(2)").attr("data-slide-id","2");
+	$(".carousel-indicators li:eq(3)").attr("data-slide-id","3");
+
+
+	$('.secLinkBtnShow').on('click', function(event){
+        var idVal = $(this).attr('id');
+        var charVal = idVal.slice(-1);
+        $('#secLinkBtnShow'+charVal).hide();
+        $('#hiddenContent'+charVal).show();
+    });
+
+    $('.secLinkBtnHide, .closeicon').on('click', function(event){
+        var idVal = $(this).attr('id');
+        var charVal = idVal.slice(-1);
+        $('#secLinkBtnShow'+charVal).show();
+        $('#hiddenContent'+charVal).hide();
+    });
+
+    $('.pointerEventsNone').click(function(e) {
+        if (!(/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini|ipad/i.test(navigator.userAgent))) {
+            return false;
+        }
+    });
+    //$(".navbar-collapse.collapse.in").css("background-color","#333F48");
+
+    $("input#search").val("");
+    $('input#search').attr({"placeholder": "Search", "autocomplete": "off"});
+
+    $(".fullheader ul" ).first().addClass("top_nav");
+    $(".sr-only").text("MENU");
+    $(".search_overlay input#tags" ).attr("placeholder","Search");
+    $("#sitemap .isi h2" ).attr("id","isi");
+    if ($('.search-results').html() != undefined) {
+        $("#search-results-introduction").wrapAll("<div class='search_results_head' />");
+    }
+
+    /* Sub Nav URL Changes Starts here*/
+
+    $("ul.dropdown-menu.multi-level li.what_is_eosinophilic_asthma a" ).attr("href","/what-is-eosinophilic-asthma.html#eosinophilic-asthma");
+    $("ul.dropdown-menu.multi-level li.symptoms a").attr("href","/what-is-eosinophilic-asthma.html#symptoms");
+    $("ul.dropdown-menu.multi-level li.risks a").attr("href","/what-is-eosinophilic-asthma.html#risks");
+    $("ul.dropdown-menu.multi-level li.treatment a").attr("href","/what-is-eosinophilic-asthma.html#treatment");
+
+    $("ul.dropdown-menu.multi-level li.what_is_fasenra a").attr("href","/eosinophilic-asthma-treatment.html#what-is-fasenra");
+    $("ul.dropdown-menu.multi-level li.is_fasenra_right_for_you a").attr("href","/eosinophilic-asthma-treatment.html#is-fasenra-for-you");
+    $("ul.dropdown-menu.multi-level li.dosing a").attr("href","/eosinophilic-asthma-treatment.html#dosing");
+    $("ul.dropdown-menu.multi-level li.getting_started a").attr("href","/eosinophilic-asthma-treatment.html#specialist");
+
+    $("ul.dropdown-menu.multi-level li.welcome_to_fasenra a").attr("href","/taking-fasenra.html#welcome-to-fasenra");
+    $("ul.dropdown-menu.multi-level li.fasenra_stories a").attr("href","/taking-fasenra.html#testimonials");
+    $("ul.dropdown-menu.multi-level li.staying_on_treatment a").attr("href","/taking-fasenra.html#staying-on");
+    $("ul.dropdown-menu.multi-level li.risk_and_side_effects_of_fasenra a").attr("href","/taking-fasenra.html#side-effects");
+
+    /* Sub Nav URL Changes Ends here */
+
+
+    if($(document).width() > 1004){
+        $(".fullnavigation ul.navbar-nav" ).append("<li class='search' data-this-parent='search'><a id='opensearch'><img src='/content/dam/website-services/us/519-fasenra-com/redesign/images/search.png' /></a></li>");
+        $( ".fullnavigation .navbar-nav li").not(".search").mouseover(function() {
+            if($(this).attr("class") == "what-is-eosinophilic-asthma" || $(this).attr("class") == "eosinophilic-asthma-treatment" || $(this).attr("class") == "taking-fasenra"){
+                $("#header").css({'height': '235px', 'margin-bottom': '0'});                    
+            }else{$("#header").css({'height': '135px', 'margin-bottom': '100px'});}
+            $("#header").css({'background-color': '#333F48'});
+            $(".fullheader .logo img" ).attr("src","/content/dam/website-services/us/519-fasenra-com/redesign/images/FasenraLogoH.png");
+
+        });
+        $( ".fullnavigation .navbar-nav li").not(".search").mouseleave(function() {
+            $("#header").css({'background-color': 'transparent'});
+            $(".fullheader .logo img" ).attr("src","/content/dam/website-services/us/519-fasenra-com/redesign/images/FasenraLogo.png");
+        });
+
+    }
+    else if($(document).width() < 1005){
+        $(".fullheader ul.list-inline:nth-of-type(2)" ).append("<li class='search' data-this-parent='search'><a id='opensearch'><img src='/content/dam/website-services/us/519-fasenra-com/redesign/images/search.png' /></a></li>");
+        $(".navbar-collapse.collapse ul.nav.navbar-nav" ).before("<div class='open_nav_top'><p class='width20'><a href='javascript:void(0)' id='closenav' class='closebtn'>×</a></p><p class='collape_nav_logo'><a href='/home.html'><img alt='FASENRA® (benralizumab) Logo' title='FASENRA® (benralizumab) Logo' class='img-responsive' src='/content/dam/website-services/us/519-fasenra-com/redesign/images/FasenraLogoH.png' /></a></p></div><div class='clear'></div>");
+        $(".navbar-default ul.nav.navbar-nav" ).append("<li class='contact-us' data-this-parent='contact-us'><a data-toggle='modal' rel='/content/WebsiteServices/us/519-fasenra-com/en/us-redesign/contact-us.html' data-modal-type='largeModal' href='#contact-us' class='modal-page-link'>Contact Us</a></li>");
+        $(".navbar-default ul.nav.navbar-nav" ).append("<li class='privacy-policy' data-this-parent='privacy-policy'><a target='_blank' href='http://www.azprivacynotice.com/Privacy-Notice'>Privacy Notice</a></li>");
+        $(".navbar-default ul.nav.navbar-nav" ).append("<li class='legal-statement' data-this-parent='legal-statement'><a target='_blank' href='http://www.azprivacynotice.com/Legal-Statement.html'>Legal Statement</a></li>");
+        $(".navbar-default .navbar-nav .open .dropdown-menu li a").click(function(){
+            $(".navbar-collapse.collapse").removeClass("in");
+        });
+        $("ul.dropdown-menu.multi-level li a").click(function(){    
+            $(".navbar-header button").click();
+        });
+
+
+
+        /*$(".accordion-list-item").click(function() {            
+            if($(this).hasClass("active"){
+               $(this + ".accordion-list-content").css({'height':'0'});
+            }else{
+               $(".accordion-list-content").css({'height':'auto'});
+            }
+        }); */
+    }
+
+    $("#opensearch").click(function(){
+        $(".search_overlay").show();
+    });
+    $("#closebtn").click(function(){
+        $(".search_overlay").hide();
+    });
+    $("#closenav").click(function(){
+        $(".navbar-header button").click();
+    });
+
+    /************* Code for Compatibility Fix in CSS *************/
+    var checkBrowserArray = ["SamsungBrowser", "Mac", "SM-T531", "SM-G920I", "Chrome", "OS", "Firefox", "MSIE"];
+    for (var i = 0; i < checkBrowserArray.length; i++) {
+        if (navigator.userAgent.indexOf(checkBrowserArray[i]) != -1) {
+            $("body").addClass(checkBrowserArray[i])
+        }
+    }
+    if (navigator.platform == "Win32") {
+        $("body").addClass("Win32")
+    }
+
+    var isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
+    isIE11 ? $("body").addClass("ie11") : $("body").removeClass("ie11");
+    /*****************************************************/
+
+
+    /***********slider isi starts here***********/
+
+    $(".isi-mainbody").clone().appendTo(".isi-content");
+    $(".isi-content .back_to_top").remove();
+
+  /*  $(window).scroll(function(){        
+        $(".isieyebrow_content").addClass("isi-scroll");
+        var isiPos= $(".isi").offset().top;
+        var currentTop = $(window).scrollTop();
+        var winHeight = $(window).height();
+        if((currentTop + winHeight - 80) >isiPos){ 
+            $(".isieyebrow_content").addClass("isi-scroll");    
+            $(".isieyebrow_content").fadeOut("slow");
+        } 
+        else if ((currentTop + winHeight - 80) < isiPos) {
+                $(".isieyebrow_content").addClass("isi-scroll");
+                $(".isieyebrow_content").fadeIn("slow");
+        }
+
+        if(currentTop > 100){
+            $(".isieyebrow_content").addClass("isi-scroll");            
+        }
+        else if(currentTop < 100){
+            $(".isieyebrow_content").removeClass("isi-scroll");
+        }
+
+    });  */
+
+    $(".isieyebrow-wrapper span.readmore").click(function(){
+        //$(".isieyebrow_content").removeClass("isi-scroll");
+          var calcheight;
+          if($(window).width()>768){
+            calcheight=$(window).height()-150+"px";
+          }
+          else{
+            calcheight=$(window).height()-$("#header").height()+75+"px";
+          }
+
+          if($(".isieyebrow-wrapper span.readmore").hasClass("collapseISI")){
+               $(this).removeClass("collapseISI");
+                $('.isieyebrow-wrapper .isi-content').animate({scrollTop:0}, '500', 'swing');
+          }
+          else{
+                $(this).addClass("collapseISI");
+          }
+       var calcOffsetTop = $("#header").css("height");
+       if($(".isieyebrow_content").hasClass("slide-up"))
+       {
+        $(".isieyebrow_content").removeClass("slide-up");
+        $("body").removeClass("fixHeader");
+        $(".isieyebrow_content").addClass("afterex");   
+        $(".slide-up").css("height",calcheight);
+        $(".isieyebrow_content").css("bottom","0px");
+       }
+       else{
+        $(".isieyebrow_content").addClass("slide-up");
+        $(".isieyebrow_content").removeClass("afterex");
+         $(".slide-up").css("height",calcheight);
+        //$(".slide-up").css("bottom",calcheight);
+        $("body").addClass("fixHeader");   
+      }
+      // $('html, body').animate({scrollTop: $('.isieyebrow_content').offset().top}, 'slow');   
+
+        //ISIaction();
+    });
+
+
+
+/***********slider isi ends here***********/
+
+/********************* Menu Highlight *************************/
+
+    var path = location.pathname;   
+    $(".collapse.navbar-collapse ul li a").each(function(){ 
+      var href = $(this).attr('href');
+              
+      if(path.match(""+href+""))
+      {
+         $(this).addClass("active-link"); 
+      }
+    });
+
+    /***** Sub menu highlight *****/
+    var hashtag= window.location.hash;
+    var fullPath= path+hashtag;
+
+    $("ul.dropdown-menu.multi-level li a").each(function(){
+        var href = $(this).attr('href');  
+        if(fullPath == href){
+            $(this).parent().addClass("subnav_active");
+        }
+    });
+
+    $("ul.dropdown-menu.multi-level li a").click(function(){
+        $("ul.dropdown-menu.multi-level li").removeClass("subnav_active");
+        $(this).parent().addClass("subnav_active");
+    });
+
+/******************* Menu Highlight ends here ******************/    
+
+/**********for scrolling and clicking to section from navigation*********/
+
+$("ul.nav li.active-sublink ul.dropdown-menu>li>a, ul.nav.navbar-nav li.nav-link a").click(function() {
+    var linker=$(this).attr('id');
+        var arr=[];
+        $( ".anchoring-point" ).each(function() {
+           var itemname=$(this).attr('name');
+           arr.push(itemname);
+
+     });
+
+       for(i=0;i<arr.length;i++){
+             if(linker===arr[i]){
+
+                 var arr1=[];
+                 $( ".anchoring-point").each(function() {
+                 var idName=$(this).attr('name');
+                 arr1.push(idName);
+                 if(linker===idName){
+                         $(this).addClass("scrolled");
+
+                 }
+           });
+             $('html, body').animate({
+                            scrollTop: $(".scrolled").offset().top
+                        }, 400, clearClass());     
+
+          function clearClass(){
+                        // alert("clear");   
+                         $(".anchoring-point").removeClass('scrolled');
+                         return; 
+           };
+
+
+        };
+    };
+
+});
+
+/*********************************************************************/    
+
+    $("#dynamicInfoGraphic .slides ul li").click(function(){
+        var liIndex = $(this).index();
+        $('.dynamicInfoGraphic .slides').removeClass("activeSlide");
+        $('.dynamicInfoGraphic .slides:eq(' + liIndex + ')').addClass("activeSlide");   
+    });
+
+
+    $("#myCarousel").on("touchstart", function(event){
+        var xClick = event.originalEvent.touches[0].pageX;
+        $(this).one("touchmove", function(event){
+            var xMove = event.originalEvent.touches[0].pageX;
+            if( Math.floor(xClick - xMove) > 5 ){
+                $(this).carousel('next');
+            }
+            else if( Math.floor(xClick - xMove) < -5 ){
+                $(this).carousel('prev');
+            }
+        });
+        $("#myCarousel").on("touchend", function(){
+            $(this).off("touchmove");
+        });
+    });
+
+
+    $('#quizCarousel').bind('slid.bs.carousel', function(e){
+		//For Carousel navigation
+        if($(".oral-steroids").hasClass("active")){
+          $(".carousel-indicators li:eq(0)").attr("data-slide-to","0");
+          $(".carousel-indicators li:eq(1), .carousel-indicators li:eq(2), .carousel-indicators li:eq(3)").attr("data-slide-to","");  
+        }
+        else if($(".emergency-icon").hasClass("active")){
+          $(".carousel-indicators li:eq(0)").attr("data-slide-to","0");
+          $(".carousel-indicators li:eq(1)").attr("data-slide-to","1");
+          $(".carousel-indicators li:eq(2), .carousel-indicators li:eq(3)").attr("data-slide-to","");  
+        }
+        else if($(".night-asthma").hasClass("active")){
+          $(".carousel-indicators li:eq(0)").attr("data-slide-to","0");
+          $(".carousel-indicators li:eq(1)").attr("data-slide-to","1");
+          $(".carousel-indicators li:eq(2)").attr("data-slide-to","2");
+          $(".carousel-indicators li:eq(3)").attr("data-slide-to","");  
+        }
+        else{
+          $(".carousel-indicators li:eq(0)").attr("data-slide-to","0");
+          $(".carousel-indicators li:eq(1)").attr("data-slide-to","1");
+          $(".carousel-indicators li:eq(2)").attr("data-slide-to","2");
+          $(".carousel-indicators li:eq(3)").attr("data-slide-to","3");    
+        }
+
+        var $this = $(this);
+        if($('#quizCarousel .carousel-inner .item:eq(4)').hasClass('active')) {
+            $this.children('#quizCarousel .carousel-control').hide();
+            $("#quizCarousel").off("swipeleft");            
+            for(var i = 0; i <= quizAns.length; i++){
+                if(quizAns[i] === 1){                    
+                    $("#quizCarousel .carousel-inner .item:eq(4)").html('<p style="margin:37px 0 0 0 !important;">You answered YES to one or more of these questions. You may have eosinophilic asthma, so ask your doctor if FASENRA might be right for you.</p>');    
+                    break;
+                }else{                    
+                    $("#quizCarousel .carousel-inner .item:eq(4)").html('<p style="margin:75px 0 0 0 !important;">Even though you answered NO to these questions, it’s still important to discuss your symptoms with your doctor.</p>');
+                }
+            }
+        }
+        else{
+            $this.children('#quizCarousel .carousel-control').show();
+        }
+        $("#quizCarousel").off("swiperight");
+
+
+    });
+
+
+    $(".back_to_top a").click(function() { 
+        $("html, body").animate({ scrollTop: 0 }, "slow"); 
+    });
+    //var quizAns = [];
+    //const quizAns = new Array(3).fill(null);
+    var quizAns = new Array(4);
+    for(var i = 0; i<quizAns.length; i++ ){
+		quizAns[i] = null;
+    }
+    $("#quizCarousel").off("swiperight").off("swipeleft");
+    $("#quizCarousel .left").click(function () {
+        var slideId = $("#quizCarousel .carousel-indicators .active").attr("data-slide-id");
+        quizAns[slideId] = 1;
+
+    });
+    $("#quizCarousel .right").click(function () {
+        var slideId = $("#quizCarousel .carousel-indicators .active").attr("data-slide-id");
+        quizAns[slideId] = 0;
+    });
+    $("ul.carousel-indicators li").click(function () {
+            //console.log($(this).attr("data-slide-id"));
+    });
+
+
+    if($(window).width()>1025){
+         $('a[href="tel:18333604357"]').css('cursor', 'auto');
+        $('a[href="tel:18333604357"]').click(function(){
+
+          return false;
+
+       }); 
+    }
+	
+	/**** SUPORRT PAGE TAB FUNCTIONALITY *****/
+	var tabs, ul, tabContent;
+	tabs = $(".support .support-tab");
+	ul = tabs.find(".tab-menus ul");
+	tabContent = tabs.find(".tab-content");
+	
+	function revealTab(n) {
+		ul.find("li").removeClass("active");
+		ul.find("li").eq(n).addClass("active");
+		ul.removeAttr("class");
+		ul.addClass("sel-li-"+n);
+		tabContent.find(".tab-cont").removeClass("active");
+		tabContent.find(".tab-cont").eq(n).addClass("active");
+	}
+	revealTab(0);
+	
+	ul.find("li").on("click", function() {
+		if(!$(this).hasClass("active")) {
+			var id = $(this).attr("class").split("-")[1];
+			revealTab(id);
+		}
+	});
+	/**** SUPORRT PAGE TAB FUNCTIONALITY *****/
+
+});
+
+
+$(window).scroll(function(){        
+        $(".isieyebrow_content").addClass("isi-scroll");
+        var isiPos= $(".isi").offset().top;
+        var currentTop = $(window).scrollTop();
+        var winHeight = $(window).height();
+        if((currentTop + winHeight - 80) >isiPos){ 
+            $(".isieyebrow_content").addClass("isi-scroll");    
+            $(".isieyebrow_content").fadeOut("slow");
+        } 
+        else if ((currentTop + winHeight - 80) < isiPos) {
+                $(".isieyebrow_content").addClass("isi-scroll");
+                $(".isieyebrow_content").fadeIn("slow");
+        }
+
+        if(currentTop > 100){
+            $(".isieyebrow_content").addClass("isi-scroll");            
+        }
+        /*else if(currentTop < 100){
+            $(".isieyebrow_content").removeClass("isi-scroll");
+        }*/
+}); 
+
+
+
+
+
+
+$(document).ready(function() {
+
+	/*********** Veeva and Last Updated Date Change for Home and Considering Fasenra Page ******************/
+
+	$(".home .copyrights_section .copyright .lud-update .asset-update").remove();
+	$(".home .copyrights_section .copyright .lud-update").append('<span class="nowrap asset-update">US-28316; US-30953 Last Updated 7/19</span>');
+
+    $(".considering-fasenra .copyrights_section .copyright .lud-update .asset-update").remove();
+	$(".considering-fasenra .copyrights_section .copyright .lud-update").append('<span class="nowrap asset-update">US-28316; US-30953; US-31235</span> <span class="nowrap asset-update">Last Updated 8/19</span>');
+
+    $(".what-is-eosinophilic-asthma .copyrights_section .copyright .lud-update .asset-update").remove();
+	$(".what-is-eosinophilic-asthma .copyrights_section .copyright .lud-update").append('<span class="nowrap asset-update">US-28316; US-31235 Last Updated 8/19</span>');
+
+    $(".taking-fasenra .copyrights_section .copyright .lud-update .asset-update").remove();
+	$(".taking-fasenra .copyrights_section .copyright .lud-update").append('<span class="nowrap asset-update">US-28316; US-31235 Last Updated 8/19</span>');
+
+    $(".sign-up-and-save .copyrights_section .copyright .lud-update .asset-update").remove();
+	$(".sign-up-and-save .copyrights_section .copyright .lud-update").append('<span class="nowrap asset-update">US-28316; US-31235 Last Updated 8/19</span>');
+
+});    

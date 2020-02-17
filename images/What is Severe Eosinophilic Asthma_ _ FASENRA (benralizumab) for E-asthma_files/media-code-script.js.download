@@ -1,0 +1,85 @@
+var externalMediaSourceCode = getParameterByName('source').toUpperCase(); //Global GET query source parameter value
+
+/****************************DOM Ready**********************************/
+/**
+Note: Replace "REGISTRATION_PAGE_NAME" with your registration form page name and 
+Replace "DEFAULT_MEDIA_SOURCE_CODE" with your Default media code
+**/
+$(document).ready(function() {
+
+
+    setMediaSourceCode(); //Set session storage Call
+    var pageName = getPageName(); //Function call to get the current page name
+    if (pageName == "sign-up-and-save") { 
+
+        //if($(window).width() < 1024 ){
+        	appendMediaSourceCode("BEN_C_C_7"); //Function call to add Media source code to survey form
+       //}
+
+        //else{
+          //  appendMediaSourceCode("SYM_C_C_4"); //Function call to add Media source code to survey form
+        //}
+     }
+ });
+
+
+/****************************DOM END****************************************/
+
+
+
+
+/********Function to add Media source code to the survey form ***************/
+
+
+function appendMediaSourceCode(defaultMediaSourceCode) {
+
+    if (!externalMediaSourceCode) {
+
+        var externalMediaSourceCodeFromSession = sessionStorage.getItem("externalMediaSourceCode");
+        if (externalMediaSourceCodeFromSession)
+
+            $(".basicsurvey form").append('<input type="hidden" name="source" value="' + externalMediaSourceCodeFromSession + '">');
+
+            else
+            $(".basicsurvey form").append('<input type="hidden" name="source" value=' + defaultMediaSourceCode + '>'); // Default code append on no query and no session value
+    } else {
+        if (!document.getElementsByName("source"))
+            $(".basicsurvey form").append('<input type="hidden" name="source" value=' + externalMediaSourceCode + '>'); // Read query string souce parameter value and set it to survey form only when the source parameter is not already present in the survey form
+    }
+}
+
+/****Function to set the source parameter value received from query string to the session storage**/
+
+
+function setMediaSourceCode() {
+
+    if (externalMediaSourceCode) {
+        sessionStorage.setItem("externalMediaSourceCode", externalMediaSourceCode);
+   }
+
+}
+
+
+
+/****Function to read the source parameter value from query string *****************/
+
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+
+/**Function to get the current page name**/
+
+function getPageName() {
+
+    var pageName = location.pathname.split('/').pop();
+    if (pageName)
+        pageName = pageName.match(/([^\/]+)(?=\.\w+$)/)[0];
+
+    console.log(pageName);
+    return pageName;
+}

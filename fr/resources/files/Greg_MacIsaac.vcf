@@ -1,0 +1,16 @@
+BEGIN:VCARD
+VERSION:3.0
+N:MacIsaac;Greg;;;
+FN:Greg MacIsaac
+ORG:GC America Inc.;
+TITLE:District Sales Manager
+EMAIL;type=INTERNET;type=WORK;type=pref:greg.macisaac@gc.dental
+TEL;type=CELL;type=pref:+1 416 910 2864
+TEL;type=WORK:+1 800 323 7063
+item1.ADR;type=WORK:;;3737 West 12th street;Alsip;IL;60803;USA
+item1.X-ABADR:us
+item2.URL;type=pref:https\://www.gcamerica/com/products
+item2.X-ABLabel:_$!<HomePage>!$_
+CATEGORIES:Work,Test group
+X-ABUID:5AD380FD-B2DE-4261-BA99-DE1D1DB52FBE\:ABPerson
+END:VCARD
