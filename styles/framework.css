@@ -107,7 +107,7 @@
 }
 
 *{
-    font-family:'SegoeUI', sans-serif;
+    font-family:'Roboto', sans-serif;
 }
 body{
 	margin: 0;
@@ -171,7 +171,7 @@ i{min-width:12px;}
 .responsive-image{display:block; width:100%;}
 .round-image{border-radius:100%;}
 /*Typography*/
-p{line-height: 14px; margin-bottom: 30px; font-size:13px; color:#6c6c6c;}
+p{line-height: 26px; margin-bottom: 30px; font-size:13px; color:#6c6c6c;}
 p strong{color:#1f1f1f;}
 h1, h2, h3, h4, h5, h6{
 	font-family:'Source Sans Pro', sans-serif;

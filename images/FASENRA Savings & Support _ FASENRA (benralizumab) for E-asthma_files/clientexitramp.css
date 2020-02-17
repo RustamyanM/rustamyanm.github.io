@@ -1,0 +1,74 @@
+/******Search Results grid end*****/ /******Overlay start*******/
+#empoverlay .mask {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 9000;
+    background-color: #000;
+    display: none;
+}
+
+#empoverlay .window {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 440px;
+    height: 200px;
+    display: none;
+    z-index: 9999;
+    padding: 20px;
+}
+
+#empoverlay #exitdialog {
+    width: 500px;
+    height: auto;
+    padding: 10px;
+    background-color: #ffffff;
+}
+
+#empoverlay #exitdialog .close {
+    color: black;
+    float: right;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 10px;
+    text-decoration: none;
+}
+
+#empoverlay #exitdialog .overlay
+    {
+    font-size: 16px;
+    margin: 15px;
+    text-align: justify;
+}
+/*****Overlay end**********/
+
+#exitdialog h1{
+    background: none repeat scroll 0 0 #8B004F;
+    color: #FFFFFF;
+    font-size: 1.1em;
+    margin: 0 0 8px;
+    padding: 4px 8px;
+}
+
+
+#exitdialog p {
+    font-size: 1em;
+    margin: 8px 0;
+}
+
+#exitdialog .btns button:hover, #exitdialog .btns button:focus, #exitdialog .btns input:hover, #exitdialog .btns input:focus {
+    background: none repeat scroll 0 0 #FFFFFF;
+    color: #F0AB00;
+}
+#exitdialog .btns button, #exitdialog .btns input {
+    background: none repeat scroll 0 0 #F0AB00;
+    border: 1px solid #F0AB00;
+    color: #FFFFFF;
+    display: block;
+    float: left;
+    font-size: 1.1em;
+    margin: 0 5px;
+    padding: 4px 8px;
+    text-decoration: none;
+}

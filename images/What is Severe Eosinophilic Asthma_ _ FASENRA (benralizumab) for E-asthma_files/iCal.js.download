@@ -1,0 +1,194 @@
+/** 
+	iCAL Generator JS 
+
+	Note to Developer:Error validations are not part of this script, this is a POC. So, Please implement proper error validation. AWS Server was initially used to create ICS files for re-using purpose. Later i have commented the code. 
+	For some reason if you are not able to achieve this on some of the browser. use the AWS Code to store the calendar on AWS Server. you need permission to use the Access key ID and SecretAccessKey, exposing these in a JavaScript is a risk. So please remove it while implementing on the website.
+
+**/
+
+
+var days_arr = ["SU","MO","TU","WE","TH","FR","SA"];
+var SEPARATOR = (navigator.appVersion.indexOf('Win') !== -1) ? '\r\n' : '\n';
+
+/***  REMOVE THIS WHILE  Implementing on the Website
+
+AWS.config.update({
+    accessKeyId : 'AKIAJK72AHWBVUTJTELQ',
+    secretAccessKey : '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'
+});
+AWS.config.region = 'us-east-2';
+
+********************************/
+
+
+
+function vcsFormatter(dosage_date, noOfDose){
+    //localStorage.setItem("BEN_003Date", false);
+	//localStorage.setItem("BEN_002Dose", false);
+	var event_reminder = "";
+
+	var _day = days_arr[dosage_date.getDay()]
+
+
+	if(noOfDose == 1){
+		var _4thweek = new Date(dosage_date);
+		var _8thweek = new Date(dosage_date);
+
+        /** If the consumer is on Dose 1; 2nd Dose is on 4th Week **/
+		_4thweek.setDate(_4thweek.getDate() + 28);
+
+        /** If the consumer is on Dose 1; 3rd Dose is on 8th Week(from Dose 1). Every other Dosage on 8 week Gap **/
+		_8thweek.setDate(_8thweek.getDate() + 56);
+
+        /** Create individual Events and append to the Calendar **/
+		event_reminder = get_8week_reminder(yyyymmdd(_8thweek), _day) + SEPARATOR + get_4week_reminder(yyyymmdd(_4thweek), _day);
+
+	}else if(noOfDose == 2){
+		var _4thweek = new Date(dosage_date);
+		var _8thweek = new Date(dosage_date);
+
+        /** If the consumer is on Dose 2; 2nd Dose is on 4th Week from Dose 2**/
+		_4thweek.setDate(_4thweek.getDate() + 28);
+        /** If the consumer is on Dose 2; 3rd Dose is on 12th Week from Dose 2**/
+		_8thweek.setDate(_8thweek.getDate() + 84);
+
+        /** Create individual Events and append to the Calendar **/
+		event_reminder = get_8week_reminder(yyyymmdd(_8thweek), _day) +  SEPARATOR + get_4week_reminder(yyyymmdd(_4thweek), _day);
+	}else{
+
+        /** If a consumer is on 3rd Dose. Every other Dosage is on 8Week gap from the dosing date **/
+		var _8thweek = new Date(dosage_date);
+		_8thweek.setDate(_8thweek.getDate() + 56);
+
+        /** Create individual Events and append to the Calendar **/
+		event_reminder = get_8week_reminder(yyyymmdd(_8thweek), _day);
+	}
+
+	var calendar_str = [
+	"BEGIN:VCALENDAR",
+    "PRODID:-//AstraZeneca //NONSGML My Product//EN",
+	"VERSION:2.0",
+	event_reminder,	
+	"BEGIN:VALARM",
+	"TRIGGER:-PT1440M",
+	"ACTION:DISPLAY",
+	"DESCRIPTION:Reminder",
+	"END:VALARM",
+	"END:VCALENDAR"].join(SEPARATOR);
+	return calendar_str;
+}
+
+function get_4week_reminder(date_val, _day){
+
+    /** 
+    	For the Recurring events, we need to mention the exact Day in which the Event should occur. So, the RRULE - BYDAY is a Dynamic Value
+		DTSTART - Event Start Date,
+    	DTEND - Event End Date - Since its a one day Reminder - start and end date should be same 
+    **/
+
+	var reminder = ["BEGIN:VEVENT",
+	"UID:uid1@example.com",
+	"DTSTAMP:"+date_val+"T080000",
+	"CATEGORIES:MEETING",
+	"STATUS:TENTATIVE",
+	"DTSTART:"+date_val,
+	"DTEND:"+date_val,
+	"SUMMARY:YOUR DOSING REMINDER",
+	"DESCRIPTION:YOUR DOSING REMINDER MESSAGE",
+	"CLASS:PRIVATE",
+	"RRULE:FREQ=WEEKLY;COUNT=1;INTERVAL=4;BYDAY="+_day+";WKST=SU",
+	"SEQUENCE:0",
+	"END:VEVENT"].join(SEPARATOR);
+	return reminder;
+}
+
+function get_8week_reminder(date_val, _day){
+
+    /** 
+    	For the Recurring events, we need to mention the exact Day in which the Event should occur. So, the RRULE - BYDAY is a Dynamic Value
+		DTSTART - Event Start Date,
+    	DTEND - Event End Date - Since its a one day Reminder - start and end date should be same 
+    **/
+
+
+	var reminder = ["BEGIN:VEVENT",
+	"UID:uid2@example.com",
+                    "DTSTAMP:"+date_val+"T080000",
+	"CATEGORIES:MEETING",
+	"STATUS:TENTATIVE",
+	"DTSTART:"+date_val,
+	"DTEND:"+date_val,
+	"SUMMARY:YOUR DOSING REMINDER",
+	"DESCRIPTION:YOUR DOSING REMINDER MESSAGE",
+	"CLASS:PRIVATE",
+	"RRULE:FREQ=WEEKLY;INTERVAL=8;BYDAY="+_day+";WKST=SU",
+	"SEQUENCE:0",
+	"END:VEVENT"].join(SEPARATOR);
+    return reminder;
+}
+
+
+function create_iCal(){
+
+    /** Dosing Date Format : YYYYMMDDTHHMMSS **/
+
+    /*var dos_date = new Date($("#BEN_003").val());
+    var dose_num = $("input[name='BEN_002']:checked").val();
+	console.log("Dosing Date-------"+ dos_date);
+	console.log("Dosing Interval-------"+ dose_num);
+	var _vcs = vcsFormatter (dos_date, dose_num);
+	window.open("data:text/calendar;charset=utf8," + escape(_vcs));*/
+
+
+
+	var dos_date = new Date(localStorage.getItem("BEN_003Date"));
+	var dose_num = localStorage.getItem("BEN_002Dose");
+	console.log("Dosing Date-------"+dos_date);
+	console.log("Dosing Interval-------"+dose_num);
+	if(dos_date && dose_num){
+        console.log('------true------');
+		var _vcs = vcsFormatter (dos_date, dose_num);
+		window.open("data:text/calendar;charset=utf8," + escape(_vcs));
+	}
+
+
+
+	/***  REMOVE THIS WHILE  Implementing on the Website
+    Note to Developer: This code will generate 
+
+    var bucket = new AWS.S3({params: {Bucket: 'azassetsbackup'}});
+    var dt = new Date().getTime() + Math.floor(Math.random() * 1000) + 1;
+	var fName = dt.toString() + "_cal.vcs";
+    var params = {Key: fName, ContentType: "text/calendar; charset=utf-8", Body: _vcs, ACL: 'public-read'};
+
+	bucket.upload(params).on('httpUploadProgress', function(evt) {
+        console.log("Uploaded :: " + parseInt((evt.loaded * 100) / evt.total)+'%');
+    }).send(function(err, data) {
+        if(err){
+            console.log("ERROR ! " + err );
+            return;
+        }
+        console.log(data.Location.toString());
+    	window.open(data.Location.toString());
+
+	});
+    */
+}
+
+/** This is Created Only for POC 
+
+$(document).ready(function(){
+    $(".add_cal_btn").hide();
+	$( "#date_field").datepicker();
+    $("#submit_btn").click(create_iCal);
+});**/
+
+/** End of POC Elements **/
+
+function yyyymmdd(dt) {
+    //var now = new Date(dt);
+    var y = dt.getFullYear();
+    var m = dt.getMonth() + 1;
+    var d = dt.getDate();
+    return '' + y + (m < 10 ? '0' : '') + m + (d < 10 ? '0' : '') + d;
+}
